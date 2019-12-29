@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
 import *  as html2canvas from 'html2canvas';
 
 @Component({
@@ -6,7 +6,7 @@ import *  as html2canvas from 'html2canvas';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     //   let element = document.getElementById("id");
     //   console.log(element);
@@ -34,7 +34,15 @@ export class AppComponent implements OnInit {
 
 
   }
-  ngOnInIt() {
 
+  ngOnDestroy() {
+    console.log('on destroy');
+    localStorage.clear();
+  }
+
+  @HostListener("window:beforeunload", ["$event"])
+  clearLocalStorage(event) {
+    localStorage.removeItem('hi');
+    console.log('####Destroy local storage####');
   }
 }

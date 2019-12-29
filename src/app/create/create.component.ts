@@ -1,5 +1,5 @@
 import { TitleValidators } from './create.validators';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Form, FormGroup, FormControl, Validators } from '@angular/forms';
 @Component({
   selector: 'create',
@@ -12,11 +12,16 @@ export class CreateComponent implements OnInit {
     TitleValidators.cannotContainSpecialChar, TitleValidators.shouldBeUnique]),
     description: new FormControl()
   });
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit() {
+
+
   }
   submit(f: Form) {
+    console.log('Local 2', localStorage['hi']);
+    localStorage['hi'] = 'hi';
     console.log(f);
   }
 
@@ -27,6 +32,9 @@ export class CreateComponent implements OnInit {
   ];
 
   get title() {
+
+    console.log('Local ', localStorage['hi']);
     return this.form.get('title');
   }
+
 }                       
